@@ -1,0 +1,416 @@
+* Java as a programming language.
+* Why java is considered as platform independent language?
+    * Bytecode 
+    * JVM ( Java Virtual Machine ) 
+    * Try to save the java with the extension .java.
+    * After we compile we get a file with the extension .class.
+    * We actually make use of .class file to execute our java code.
+    * So while executing or running java program or code we don't require .java file which is the
+      source code. So to the customer/client we can just provide the .class file because they 
+      are not going to change the code. They are just going to execute the program.
+    * Started learning programming with Java. 
+      class Hello {
+       // main() main method is entry point of the java code
+  
+      }
+    * File name and the class name need not to be same if the class is not declared as public which means if we have a file Hello.java and the class as
+        class Hi  {}
+    The above case is file. So when we compile our Hello.java , it will create a .class file with
+    the name Hi.class. 
+--------------------------------------------
+It is mandatory to keep file and class name same when the class is public. So the following case
+will give compilation error.
+     Suppose the file name is Hello.java and the code is
+     public class Hi   {}
+   To avoid compilation error either we have to change the file name as Hi.java or make the class
+   name as Hello.
+----------------------------------------------------------------------------------------------
+// keywords
+// identifiers
+// variables
+// datatypes
+// 
+
+     System.out.print("Hello\nWorld"); ====> backward slash
+    
+
+--------------------------------------------------------------------------------
+   public class Demo1  {
+     public static void main(String ar[]) {
+       
+    }
+  }
+ 
+So we have 2 types of data 
+ * primitive type  ===> char, byte, short
+ * non primtive    ===> class ====> Predefined and user defined
+----------------------------------------------------------------------------------------
+     If we are planning to store a number , writing
+    num wont work because it is not giving the idea that what kind of value like int or char or 
+   String we can store. That is being decided by the datatype. 
+
+    int num; 
+   Using datatype decides what kind of value we can store.
+   Here for primitive type num is called as a variable.
+
+   But when we are using or writing something with reference type we dont call them as variable
+   We call them as reference variable or object.
+   So that mean if we are writing 
+    String str="Hello";
+    str is not called as variable, it is called as reference variable or we can call it as an 
+    object.
+   ------------------------------------------
+While insisting on Object oriented approach we talk about class and object.
+
+Q Is it possible to take/declare the local variables outside the main method and within the class?
+A: yes
+
+     package infosys.demo.classobject;
+      public class Demo8 {
+         int num; // Now the num is called as instance variable / member variable
+         public static void main(String args[]) {
+
+         }
+     }
+
+Q How we access this variable inside the main method?
+A As we know that a static can only access static member so one way will be making the 
+  num as static member.
+
+   
+     package infosys.demo.classobject;
+      public class Demo9 {
+        static int num; // Now the num is called as instance variable / member variable
+         public static void main(String args[]) {
+         System.out.println(num);
+         }
+     }
+----------------------------------------------------------------------
+Q I dont want to make int as static and then also I want to have access. Do we have something for 
+that?
+ans YEs. In that case we have to create an object of the class where the non static member is
+declared within the main method
+
+   package infosys.demo.classobject;
+      public class Demo10 {
+         int num; 
+         public static void main(String args[]) {
+         Demo10 demo=new Demo10();
+         System.out.println(demo.num);
+         }
+     }
+Object creation is a two step process , 
+Suppose if we have a class called Employee 
+    package infosys.demo.classobject;
+    public class Employee {
+       int id;
+       String name;
+       int basic;
+       public static void main(String args[]) {
+        Employee emp=new Employee();
+        System.out.println(emp.id);
+        System.out.println(emp.name);
+        System.out.println(emp.basic);
+
+      }
+    }
+    So the line Employee emp=new Employee(); can be broken into two statements
+    Employee emp; // Employee is a class and emp is a reference variable which will hold the
+   // address of the newly created object.
+   emp=new Employee();
+   // new keyword is creating the object of Employee class during the runtime. So in the above
+   // line , RHS statement of = is creating the object and the address of that object is assigned
+  // to the reference variable emp which is in the LHS.
+  // When we get the address of the newly created object we can continue accessing the object with
+  // the reference emp.
+
+  That is the differce between primitive type and reference type . In primitive type when 
+we are writing 
+   int num=10;
+   num variable is directly storing the value 10.
+  Whereas when we are writing 
+  Employee emp=new Employee();
+  emp is not storing any data directly but it is storing the address or reference of the newly created
+  object. 
+-----------------------------------------------------------------------------------------
+I can see in the Employee code that we are not initialising , but then also I able to see some
+initial value which I want to change . Is it possible?
+ans: YEs . Write your own parameterless or parameterized constructor and have your own
+  desired value. So the code is shown in Employee2.In Employee2 we created parameterless
+  constructor and in this code we created two object emp and emp2. Both the object are
+  getting same set of values.
+
+Q Can I initialize with different set of values in the constructor rather than every object
+getting same set of values?
+Ans: Yes. Go for paramaterized constructor.Employee3 is having the code.
+
+
+------------------------------------------------------------------------------------------------
+Whenver we design a class , class will have member variables and member methods.
+
+  public class Student {
+      int roll;
+      String name;
+      int marks;
+    // roll,name and marks are attributes/instance variables    
+     
+    // parameterized constructor
+    // r,n and m are parameters and also local to the constructor
+      Student(int r, String n, int m){
+        roll=r;   // the value of r is assigned to roll
+        name=n;  // name is refering to the same address which is being 
+        // pointed by n and n is pointing to "Prashant"
+        marks=m;  // the value of m is assigned to marks
+       }
+
+     // method to display the student details
+      void displayStudent(){
+       System.out.println(roll);     
+       System.out.println(name);
+       System.out.println(marks);
+      }
+   
+      public static void main(String str[]) {
+        Student student1=new Student(1,"Prashant",80);
+        student1.displayStudent();
+       Student student2=new Student(2,"Ashish",90);
+       student2.displayStudent();
+     
+      }
+  }  
+
+
+
+--------------------------------------------------
+Q we made all the members in demo Employee4 with default access but not the main method. Can 
+we keep main method with default access specifier?
+ans: No. As the main method is accessed outside the class by JVM. It should have public access
+  specifier.
+
+Q We made all the members as non static. Can we make main method as non static?
+ans: No we cannot make main as non static method.
+---------------------------------------------------------------------------------------------
+ Q In example Employee5 we made all the members as private ( excluding main). main method
+   cannot be private . If main is private , the JVM wont be able to access main and if it
+   is not able to access main , our code won't get executed. So is it possible to declare
+   all the members as private as we have done in Employee5?
+ans: Yes because currently main and rest of the members are in the same class. As they are
+     in the same class, private members are accessible within the same class. In example
+     with Employee5 you can directly access the member variables or the methods as all the
+     members are packed in the same class.
+-------------------------------------------------------------------------------------------------
+Q. Is it a good practice to keep the main method and rest of the class details in the same class?
+ans: No. Let us see in Employee6. How we can manage with multiple classes for arranging main
+method in a different class and rest of the employee details like attributes and methods in a
+different class.
+package infosys.demo.classobject;
+ 
+   class Employee6 {
+       private int id;      // id, name and basic are instance variables/attributes
+       private String name;
+       private int basic;
+       
+       private Employee6(int i, String nm, int b)
+       {
+    	   id=i;
+    	   name=nm;
+    	   basic=b;
+       }
+      
+        private void displayEmployee() {
+    	   System.out.println(id);  
+           System.out.println(name);
+           System.out.println(basic);
+      }
+   }
+   
+   public class EmployeeMain {
+        
+      public static void main(String args[]) {
+        Employee6 emp=new Employee6(1,"Ashok",3000);  // error because the classes
+      // are different and we are trying to access a private constructor from different class
+        emp.displayEmployee();
+      // as displayEmployee() is private
+        System.out.println(emp.id);
+        System.out.println(emp.name);
+// We are even not able to access id and name because they are private
+        Employee6 emp2=new Employee6(2,"Nandini",4000);
+        emp2.displayEmployee();
+
+      }
+
+    }
+
+Lots of compilation error. As we all private members are accessible within the same class.
+--------------------------------------------------------------------------
+So to avoid the compilation error and with the good approach we will keep member variables
+as private and constructor and other member methods can be either default or public.
+As currently our both the classes are in same package it can have either default or public 
+access specifier.
+--------------------------------------------------------------------------------------------------
+Q Can we write classes in separate file?
+Ans: Yes. Employee8 and EmployeeMain3. We can see the members and the class Employee8 is having
+default access. As the Employee8 and EmployeeMain3 is in same package , We can access the 
+default members of Employee8 from EmployeeMain3.If they are in different packages, we wont
+be able to access the default member of a class from different packages.
+-------------------------------------------------------------------------------------------------
+Q Is the behaviour of public and default access specifiers are same if the classes are in the same
+package?
+Ans: Yes
+[Note: default specifier is also called as package specific specifier because default are
+accessible only in the same package. Public are accessible from anywhere and let it be same
+or different packages.]
+
+-------------------------------------------------------------------------------------------
+Until unless we discuss about multiple packages, let us concentrate on default and private.
+and also let us not talk about protected until unless we discuss about inheritance.
+  
+------------------------------------------------------------------------------------------------------
+Q Can we have one method for storing data and other method for displaying data. I want to 
+  accept data from user.
+Y: we can plan for setData and within that we can declare a Scanner object locally within the
+setData method and within dispData we can display the details.  Employee10 and Employee10Main.
+-----------------------------------------------------------------------------------------------
+Q Is it not enough to constructor only to set the value? Why I should write a method for 
+storing or setting the values for the instance variables?
+Ans: constructors ( parameterless or parameterized) are called once during the object creation.
+     But methods can be called multiple times which means if during the execution of a code
+     we have a plan for changing or updating the object's data , we can do it through setData
+     methods.
+-------------------------------------------------------------------------------------------------
+Q Is setData kind of methods are good to write which is accepting value for all the attributes?
+Ans: Not so good because it is forcing the user to enter the details for all the attributes
+     but we may have a requirement where we want to skip some of the attributes.
+    For example we created a class called EmployeeDetails and have id , name and passport number
+    but it may happen that employee called Juhi is not having any passport.
+------------------------------------------------------------------------------------------------
+Q So what is good way to store the data and display the data in such a way that we are not forced
+to set all the details or display all the details?
+Ans: We can go for setter and getter methods for each of the attribute.
+// setter method is used of storing the data
+// setter method dont have any return type
+// setter methods do have parameter whose datatype will be as same as of the attribute for which
+// it is storing value
+// getter method is used for reading or accessing data
+// getter method do have return type which is of the datatype same as that of the attribute for 
+// which it is reading the data
+    public class Student {
+     private int roll;
+     private String name;
+     private int marks;
+
+     void setRoll(int r) {
+     roll=r;
+     }
+     int getRoll(){
+     return roll;
+     }
+     void setName(String n){
+     name=n; 
+     }
+     String getName(){
+     return name;
+     }
+     void setMarks(int m){
+     marks=m;
+     }
+     int getMarks() {
+      return marks;
+     }
+    }
+
+    public class StudentMain {
+     public static void main(String args[]){
+        Student student1=new Student();
+        Student student2=new Student();
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Enter the roll");
+        int roll=scanner.nextInt();
+        student1.setRoll(roll);
+        System.out.println("Enter the name");
+        String name=scanner.next();
+        student1.setName(name);
+        System.out.println("Enter the marks");
+        int marks=scanner.nextInt();
+        student1.setMarks(marks);
+        System.out.println("The details of student1");
+        System.out.println(student1.getRoll());
+        name=student1.getName();
+        System.out.println(name);
+        marks=student1.getMarks();
+        System.out.println(marks);
+        System.out.println("Enter the roll");
+        roll=scanner.nextInt();
+        student2.setRoll(roll);
+        System.out.println("Enter the name");
+         name=scanner.next();
+        student2.setName(name);
+       /* System.out.println("Enter the marks");
+         marks=scanner.nextInt();
+        student2.setMarks(marks); */
+        System.out.println("The details of student2");
+        System.out.println(student2.getRoll());
+        name=student2.getName();
+        System.out.println(name);
+       /* marks=student1.getMarks();
+        System.out.println(marks);  */
+     }
+   }
+
+-------------------------------------------------------------------
+One reference variable will store one object at a time.
+
+1.   Employee emp=null;       // We have created a reference variable emp and we are
+                           //  initialising it with null which means currently it is 
+                           // not refering to any object's address
+2.   emp=new Employee();    // with new Employee() a object got created and reference is in emp
+                          // reference variable
+3.   emp=new Employee();   // now emp is referring to a new object and it is not referring to the 
+                            object created in line 2
+--------------------------------------------------------------------
+One object can be referenced by multiple reference variables.
+
+Customer customer=new Customer();
+Customer customer1=customer;
+Customer customer2=customer;
+-----------------------------------------------------------------------------------------------
+Customer customer=new Customer();
+Customer customer1=new Customer();
+---------------------------------------------------------------------------------------------
+
+ 1 Book book=new Book();
+ 2 book=new Book();
+ 3. // statements are present
+
+So in the above example we cannot assure that the object which got created in line 1 will 
+be garbage collected just after the execution of line2. But we can say that after line 2 
+the object which got created in line one is eligible for garbage collection.
+-------------------------------------------------------------------------------------------------
+  1. Book book=null; // currently it is not storing any address
+  2. book=new Book(); // It is storing the address of newly create object
+  3. book.setId(1);      // We are storing the id of the newly created book object
+  4. book.setTitle("Java");
+  5. System.out.println(book.getId()); // We are accessing the id of the newly created object
+  6. System.out.println(book.getTitle());
+  7.book=null;      // now we are dereferencing the reference variable by assigning null to it.
+  8. System.out.println(book.getId()); // NullPointerException ( Currently not pointing any object)
+// After line 7 , we wont be able to access the object which got created in line 2.
+-----------------------------------------------------------------------------------------------
+  
+1. public void setData() {
+2.  Scanner scan=new Scanner(System.in);
+3  // all the inputs with Scanner object
+  
+  }  // as the scope of Scanner object ends, the object created at line 2 is eligible for garbage
+  // collection
+-----------------------------------------------------------------------------------------------------
+
+ 
+   
+
+    
+
+
+
+
+  
